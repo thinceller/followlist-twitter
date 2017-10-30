@@ -1,3 +1,4 @@
 config.py
 out/
+venv/
 __pycache__
