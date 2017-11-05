@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 
 import csv, json, config
+from datetime import datetime
 from requests_oauthlib import OAuth1Session
+USER = "thinceller"
 
 ### Constants
 oath_key_dict = {
@@ -13,10 +15,14 @@ oath_key_dict = {
 
 ### Function
 def main():
-    list = followlist("thinceller", oath_key_dict)
+    list = followlist(USER, oath_key_dict)
+
+    # ファイル名作成
+    date = datetime.now().strftime("%Y%m%d-%H%M%S")
+    file_name = USER + "_" + date + ".csv"
 
     # 書き込みモードでファイル展開
-    with open("out/followlist.csv", "w") as csvfile:
+    with open("out/" + file_name, "w") as csvfile:
         writer = csv.writer(csvfile, lineterminator="\n")
         writer.writerow(["名前", "ユーザID", "固有ID"])
 
