@@ -22,19 +22,15 @@ def main():
     file_name = USER + "_" + date + ".csv"
 
     # 書き込みモードでファイル展開
-    with open("out/" + file_name, "w") as csvfile:
+    with open("out/" + file_name, mode="w", encoding="utf-8") as csvfile:
         writer = csv.writer(csvfile, lineterminator="\n")
         writer.writerow(["名前", "ユーザID", "固有ID"])
 
         for account in list:
-            # 一度encode()でオプション付きでbyte型に変換してからstrに戻す
-            name = account["name"].encode("cp932", "ignore")
-            screen_name = account["screen_name"].encode("cp932", "ignore")
-            id_str = account["id_str"].encode("cp932", "ignore")
-
-            name = name.decode("cp932")
-            screen_name = screen_name.decode("cp932")
-            id_str = id_str.decode("cp932")
+            # 必要な情報の抽出
+            name = account["name"]
+            screen_name = account["screen_name"]
+            id_str = account["id_str"]
 
             list = [name, screen_name, id_str]
             writer.writerow(list)
